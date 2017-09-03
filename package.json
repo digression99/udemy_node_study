@@ -1,0 +1,16 @@
+{
+  "name": "udemy_node_project1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kimilsik",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "nodemon": "^1.11.0",
+    "yargs": "^8.0.2"
+  }
+}
