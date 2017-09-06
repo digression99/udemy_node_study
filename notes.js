@@ -6,8 +6,31 @@
 
 //module.exports.age = 25;
 
+const fs = require('fs');
+
 let addNote = (title, body) => {
-    console.log('Adding note', title, body);
+    let notes = [];
+    let note = {
+        title, // es6 syntax
+        body
+    };
+
+    try {
+        // if there's no file, app crashes.
+        let notesString = fs.readFileSync('notes-data.json');
+        notes = JSON.parse(notesString);
+    }
+    catch (e) {
+        console.log(e);
+    }
+
+    let duplicateNotes = notes.filter(note => note.title === title);
+    console.log('dup notes : ', duplicateNotes); // filter 시 callback의 기준으로 추가하게 된다.
+
+    if (duplicateNotes.length === 0) {
+        notes.push(note);
+        fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+    }
 };
 
 let getAll = () => {
