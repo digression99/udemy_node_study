@@ -9,8 +9,11 @@
   "author": "kimilsik",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.0",
+    "express": "^4.16.2",
     "lodash": "^4.17.4",
     "nodemon": "^1.11.0",
+    "request": "^2.81.0",
     "yargs": "^8.0.2"
   }
 }
