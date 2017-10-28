@@ -5,10 +5,16 @@
 //
 // ls -a : shows every hidden files ( . files, .. files, ..
 //
+// ** how can I remove node_modules files from already committed repo?
 //
 //
-//
+/*
 
+id_rsa : it is private key.
+
+
+
+ */
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
