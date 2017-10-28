@@ -12,6 +12,9 @@
 
 id_rsa : it is private key.
 
+add a new feature
+-> /projects, /portfolio.
+
 
 
  */
@@ -87,6 +90,12 @@ app.get('/about', (req, res) => {
         //currentYear : new Date().getFullYear(),
     });
 });
+
+app.get('/projects', (req, res) => {
+    res.render('projects.hbs', {
+        pageTitle : "Projects",
+    });
+})
 
 app.get('/bad', (req, res) => {
     res.send({
