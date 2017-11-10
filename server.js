@@ -24,7 +24,6 @@ const fs = require('fs');
 
 const port = process.env.PORT || 3000; // for heroku, local
 
-
 var app = express(); // express as a function.
 
 hbs.registerPartials(__dirname + '/views/partials');
