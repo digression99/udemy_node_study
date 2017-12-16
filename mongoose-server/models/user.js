@@ -1,6 +1,6 @@
-let {mongoose} = require('mongoose');
+let mongoose = require('mongoose');
 
-let User = mongoose.model('user', { // user should be uppercase.
+let User = mongoose.model('User', { // user should be uppercase.
     email : {
         type : String,
         required : true,
