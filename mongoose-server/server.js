@@ -6,6 +6,9 @@ let {Todo} = require('./models/todo');
 let {User} = require('./models/todo');
 const {ObjectID} = require('mongodb');
 
+// this is for heroku deployment.
+const port = process.env.PORT || 3000;
+
 let app = express();
 
 app.use(bodyParser.json());
@@ -73,7 +76,7 @@ app.get('/todos', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log('started on port 3000');
+    console.log(`started up at port ${port}`);
 });
 
 module.exports = {app};

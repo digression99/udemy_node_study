@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha mongoose-server/**/*.test.js",
     "test-watch": "nodemon --exec \"npm test\"",
-    "start": "node server.js"
+    "start": "node mongoose-server/server.js"
   },
   "author": "kimilsik",
   "license": "ISC",
