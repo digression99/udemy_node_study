@@ -50,12 +50,12 @@ app.get('/todos/:id', (req, res) => {
     Todo.findById(id)
         .then(todo =>  {
             if (!todo)
-                return res.status(400).send("No todo found.");
+                return res.status(404).send("No todo found.");
 
             res.status(200).send({todo});
             // why object? because it's more scalable.
         })
-        .catch(e => res.status(400).send(e));
+        .catch(e => res.status(404).send(e));
     // }, e => {
     //     res.status(400).send(e);
     // });

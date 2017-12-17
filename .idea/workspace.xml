@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4af8793a-1916-4a9d-85de-194608f9478e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mongoose-server/server.js" afterPath="$PROJECT_DIR$/mongoose-server/server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mongoose-server/tests/server.test.js" afterPath="$PROJECT_DIR$/mongoose-server/tests/server.test.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mongoose-server/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="55" column="33" lean-forward="false" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+            <state relative-caret-position="200">
+              <caret line="46" column="51" lean-forward="false" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -40,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.test.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.test.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mongoose-server/tests/server.test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="68" column="45" lean-forward="true" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
+            <state relative-caret-position="250">
+              <caret line="110" column="45" lean-forward="false" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -106,10 +106,10 @@
         <option value="$PROJECT_DIR$/mongoose-server/server.jtest.js" />
         <option value="$PROJECT_DIR$/mongoose-server/server.test.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/mongoose-server/tests/server.test.js" />
         <option value="$PROJECT_DIR$/mongoose-server/models/user.js" />
         <option value="$PROJECT_DIR$/playground/mongoose-queries.js" />
         <option value="$PROJECT_DIR$/mongoose-server/server.js" />
+        <option value="$PROJECT_DIR$/mongoose-server/tests/server.test.js" />
       </list>
     </option>
   </component>
@@ -252,30 +252,60 @@
     </option>
   </component>
   <component name="RunManager" selected="Node.js.server.js">
-    <configuration name="callbacks.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="callbacks.js" working-dir="$PROJECT_DIR$/playground" />
+    <configuration name="GET /todos/id" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>SUITE</test-kind>
+      <test-file>$PROJECT_DIR$/mongoose-server/tests/server.test.js</test-file>
+      <test-names>
+        <name value="GET /todos/id" />
+      </test-names>
+    </configuration>
+    <configuration name="GET /todos/id.should return 404 if todo not found" type="mocha-javascript-test-runner" factoryName="Mocha" temporary="true" nameIsGenerated="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory>$PROJECT_DIR$</working-directory>
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui>bdd</ui>
+      <extra-mocha-options />
+      <test-kind>TEST</test-kind>
+      <test-file>$PROJECT_DIR$/mongoose-server/tests/server.test.js</test-file>
+      <test-names>
+        <name value="GET /todos/id" />
+        <name value="should return 404 if todo not found" />
+      </test-names>
+    </configuration>
     <configuration name="mongodb-connect.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="mongodb-connect.js" working-dir="$PROJECT_DIR$/playground" />
     <configuration name="mongodb-update.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="mongodb-update.js" working-dir="$PROJECT_DIR$/playground" />
     <configuration name="server.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="server.js" working-dir="$PROJECT_DIR$/mongoose-server" />
-    <configuration name="weather-app.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="weather-app.js" working-dir="$PROJECT_DIR$" />
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Node.js.callbacks.js" />
-      <item index="1" class="java.lang.String" itemvalue="Node.js.weather-app.js" />
-      <item index="2" class="java.lang.String" itemvalue="Node.js.mongodb-connect.js" />
-      <item index="3" class="java.lang.String" itemvalue="Node.js.mongodb-update.js" />
-      <item index="4" class="java.lang.String" itemvalue="Node.js.server.js" />
+      <item index="0" class="java.lang.String" itemvalue="Node.js.mongodb-connect.js" />
+      <item index="1" class="java.lang.String" itemvalue="Node.js.mongodb-update.js" />
+      <item index="2" class="java.lang.String" itemvalue="Node.js.server.js" />
+      <item index="3" class="java.lang.String" itemvalue="Mocha.GET /todos/id" />
+      <item index="4" class="java.lang.String" itemvalue="Mocha.GET /todos/id.should return 404 if todo not found" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Node.js.server.js" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.mongodb-update.js" />
-        <item index="2" class="java.lang.String" itemvalue="Node.js.mongodb-connect.js" />
-        <item index="3" class="java.lang.String" itemvalue="Node.js.weather-app.js" />
-        <item index="4" class="java.lang.String" itemvalue="Node.js.callbacks.js" />
+        <item index="1" class="java.lang.String" itemvalue="Mocha.GET /todos/id.should return 404 if todo not found" />
+        <item index="2" class="java.lang.String" itemvalue="Mocha.GET /todos/id" />
+        <item index="3" class="java.lang.String" itemvalue="Node.js.mongodb-update.js" />
+        <item index="4" class="java.lang.String" itemvalue="Node.js.mongodb-connect.js" />
       </list>
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -307,12 +337,26 @@
       <workItem from="1510017273016" duration="1927000" />
       <workItem from="1510322903917" duration="1659000" />
       <workItem from="1510472409636" duration="981000" />
-      <workItem from="1513307376377" duration="13380000" />
+      <workItem from="1513307376377" duration="14451000" />
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="GET__todos_id - 2017.12.17 at 16h 31m 52s.xml">
+      <configuration name="GET /todos/id" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="GET__todos_id_should_return_404_if_todo_not_found - 2017.12.17 at 16h 29m 25s.xml">
+      <configuration name="GET /todos/id.should return 404 if todo not found" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="GET__todos_id_should_return_404_if_todo_not_found - 2017.12.17 at 16h 29m 47s.xml">
+      <configuration name="GET /todos/id.should return 404 if todo not found" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+    <history-entry file="GET__todos_id_should_return_404_if_todo_not_found - 2017.12.17 at 16h 31m 04s.xml">
+      <configuration name="GET /todos/id.should return 404 if todo not found" configurationId="mocha-javascript-test-runner" />
+    </history-entry>
+  </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72367000" />
+    <option name="totallyTimeSpent" value="73438000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -329,12 +373,12 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15277778" sideWeight="0.4935065" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889965" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27529413" sideWeight="0.19930555" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4282353" sideWeight="0.7138889" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27529413" sideWeight="0.20763889" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4282353" sideWeight="0.7" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27529413" sideWeight="0.80069447" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27529413" sideWeight="0.79236114" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.49166667" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15277778" sideWeight="0.5064935" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -352,7 +396,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -715,14 +761,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mongoose-server/tests/server.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="68" column="45" lean-forward="true" selection-start-line="68" selection-start-column="45" selection-end-line="68" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/playground/mongoose-queries.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
@@ -733,8 +771,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mongoose-server/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="55" column="33" lean-forward="false" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+        <state relative-caret-position="200">
+          <caret line="46" column="51" lean-forward="false" selection-start-line="46" selection-start-column="51" selection-end-line="46" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mongoose-server/tests/server.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="110" column="45" lean-forward="false" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
           <folding />
         </state>
       </provider>
