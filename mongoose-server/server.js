@@ -7,7 +7,7 @@ let {User} = require('./models/todo');
 const {ObjectID} = require('mongodb');
 
 // this is for heroku deployment.
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 let app = express();
 
@@ -72,6 +72,29 @@ app.get('/todos', (req, res) => {
         });
     }, (e) => {
         res.status(400).send(e);
+    });
+});
+
+app.delete('/todos/:id', (req, res) => {
+    let id = req.params.id;
+
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send("ID is not valid");
+    }
+
+    // remove todo by id.
+        // success
+            // if not doc, send 404.
+            // if doc, send doc back with 200.
+        // error
+            // 400 with empty body.
+    Todo.findByIdAndRemove(id).then((todo) => {
+        if (!todo) {
+            return res.status(404).send("No todo found.");
+        }
+        return res.status(200).send(todo);
+    }).catch(e => {
+        return res.status(400).send(e);
     });
 });
 
