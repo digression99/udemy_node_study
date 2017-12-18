@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 let {mongoose} = require('./db/mongoose');
 let {Todo} = require('./models/todo');
-let {User} = require('./models/todo');
+let {User} = require('./models/user');
 const {ObjectID} = require('mongodb');
 
 // this is for heroku deployment.
@@ -134,6 +134,33 @@ app.delete('/todos/:id', (req, res) => {
         return res.status(200).send({todo});
     }).catch(e => {
         return res.status(400).send(e);
+    });
+});
+
+// post /users
+// create new user.
+// use _.pick to get the data.
+// need to shut down database and restart.
+
+app.post('/users', (req, res) => {
+    let user = new User(_.pick(req.body, ['email', 'password']));
+
+    //Model
+    // User.findByToken.
+    // instance. individual document.
+    // user
+    // user.generateAuthToken.
+
+    user.save()
+        .then(() => {
+        return user.generateAuthToken();
+        //res.send(doc);
+    })
+        .then((token) => {
+        res.header('x-auth', token).send(user);
+    })
+        .catch(e => {
+        res.status(400).send(e);
     });
 });
 
