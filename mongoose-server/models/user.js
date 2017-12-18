@@ -64,6 +64,46 @@ UserSchema.methods.generateAuthToken = function() {
     });
 };
 
+UserSchema.statics.findByCredentials = function (email, password) {
+    var User = this;
+
+    return User.findOne({email}).then((user) => {
+        if (!user) {
+            return Promise.reject();
+        }
+
+        return new Promise((resolve, reject) => {
+            //bcrypt only support callback.
+            // so, we just return promise with the result.
+
+            bcrypt.compare(password, user.password, (err, result) => {
+                if (result) {
+                    resolve(user);
+                } else {
+                    reject();
+                }
+            })
+
+            // bcrypt.genSalt(10, (err, salt) => {
+            //     bcrypt.hash(password, salt, (err, hash) => {
+            //         bcrypt.compare(hash, user.password, (err, result) => {
+            //             console.log("result : ", result);
+            //             if (err) {
+            //                 //onsole.log(err);
+            //                 reject(err);
+            //                 //console.log(err);
+            //                 // return res.status(401).send(err);
+            //             }
+            //             resolve(user);
+            //             //res.status(200).send(user);
+            //         });
+            //     });
+            // });
+            //
+        });
+    });
+};
+
 // instance
 // use function keyword to access this.
 UserSchema.statics.findByToken = function (token) {

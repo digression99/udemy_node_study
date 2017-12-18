@@ -2,6 +2,7 @@ require('./config/config');
 
 const _ = require('lodash');
 
+const bcrypt = require('bcryptjs');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -165,6 +166,40 @@ app.post('/users', (req, res) => {
         .catch(e => {
         res.status(400).send(e);
     });
+});
+
+app.post('/users/login', (req, res) => {
+    let body = _.pick(req.body, ['email', 'password']);
+
+    User.findByCredentials(body.email, body.password).then((user) => {
+        return user.generateAuthToken().then((token) => {
+            res.header('x-auth', token).send(user); // set x-auth.
+        });
+
+        //res.send(user);
+    }).catch(e => {
+        res.status(400).send();
+    });
+    // User.find({'email' : body.email})
+    //     .then((user) => {
+    //         bcrypt.genSalt(10, (err, salt) => {
+    //             bcrypt.hash(body.password, salt, (err, hash) => {
+    //
+    //                 //console.log('user : ', user);
+    //                 bcrypt.compare(hash, user[0].password, (err, result) => {
+    //                     if (err) {
+    //                         console.log(err);
+    //                         return res.status(401).send(err);
+    //                     }
+    //                     res.status(200).send(user);
+    //                 });
+    //             });
+    //         });
+    //     })
+    //     .catch(e => {
+    //         console.log(e);
+    //         return res.status(400).send(e);
+    //     })
 });
 
 app.listen(port, () => {
