@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 let {mongoose} = require('./db/mongoose');
 let {Todo} = require('./models/todo');
 let {User} = require('./models/user');
+let {authenticate} = require('./middleware/authenticate');
+
 const {ObjectID} = require('mongodb');
 
 // this is for heroku deployment.
@@ -137,10 +139,11 @@ app.delete('/todos/:id', (req, res) => {
     });
 });
 
-// post /users
-// create new user.
-// use _.pick to get the data.
-// need to shut down database and restart.
+
+// middleware.
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
+});
 
 app.post('/users', (req, res) => {
     let user = new User(_.pick(req.body, ['email', 'password']));
