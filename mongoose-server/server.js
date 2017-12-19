@@ -21,24 +21,21 @@ let app = express();
 app.use(bodyParser.json());
 
 // resource creation.
-app.post('/todos', (req, res) => {
+app.post('/todos', authenticate, (req, res) => {
 
     let todo = new Todo({
-        text : req.body.text
+        text : req.body.text,
+        _creator : req.user._id
     });
 
-    //console.log(req.body);
     todo.save().then((doc) => {
         res.send(doc);
     }, (e) => {
         res.status(400).send(e);
-        //res.send(e);
     });
-
-    //res.send('great!');
 });
 
-app.patch('/todos/:id', (req, res) => {
+app.patch('/todos/:id', authenticate, (req, res) => {
     let id = req.params.id;
 
     // pick the content and add it to body.
@@ -59,7 +56,11 @@ app.patch('/todos/:id', (req, res) => {
         body.completedAt = null;
     }
 
-    Todo.findByIdAndUpdate(id, {$set : body}, {new : true})
+    // use find one and update.
+    Todo.findOneAndUpdate({
+        _id : id,
+        _creator : req.user._id
+    }, {$set : body}, {new : true})
         .then((todo) => {
             if (!todo) {
                 return res.status(404).send("todo doesn't exist.");
@@ -73,7 +74,7 @@ app.patch('/todos/:id', (req, res) => {
         })
 });
 
-app.get('/todos/:id', (req, res) => {
+app.get('/todos/:id', authenticate, (req, res) => {
     //req.params;
     let id = req.params.id;
 
@@ -85,29 +86,24 @@ app.get('/todos/:id', (req, res) => {
         return res.status(404).send("ID not valid.");
     }
 
-    // find by id.
-        // success case and error case.
-        // if success,
-            // if todo - send it back.
-            // if no todo - send back 404 with empty body.
-        // if error,
-            // 400 - send empty body.
-    Todo.findById(id)
+    //Todo.findById(id)
+    Todo.findOne({
+        _id : id,
+        _creator : req.user._id
+    })
         .then(todo =>  {
-            if (!todo)
-                return res.status(404).send("No todo found.");
+            if (!todo) return res.status(404).send("No todo found.");
 
             res.status(200).send({todo});
             // why object? because it's more scalable.
         })
         .catch(e => res.status(404).send(e));
-    // }, e => {
-    //     res.status(400).send(e);
-    // });
 });
 
-app.get('/todos', (req, res) => {
-    Todo.find().then((todos) => {
+app.get('/todos', authenticate, (req, res) => {
+    Todo.find({
+        _creator : req.user._id // you can get this in authenticate.
+    }).then((todos) => {
         res.send({
             todos,
             code : "lalala"
@@ -117,20 +113,19 @@ app.get('/todos', (req, res) => {
     });
 });
 
-app.delete('/todos/:id', (req, res) => {
+app.delete('/todos/:id', authenticate, (req, res) => {
     let id = req.params.id;
 
     if (!ObjectID.isValid(id)) {
         res.status(404).send("ID is not valid");
     }
 
-    // remove todo by id.
-        // success
-            // if not doc, send 404.
-            // if doc, send doc back with 200.
-        // error
-            // 400 with empty body.
-    Todo.findByIdAndRemove(id).then((todo) => {
+    //Todo.findByIdAndRemove(id)
+    Todo.findOneAndRemove({
+        _id : id,
+        _creator : req.user._id
+    })
+        .then((todo) => {
         if (!todo) {
             return res.status(404).send("No todo found.");
         }

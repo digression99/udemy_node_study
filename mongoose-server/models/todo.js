@@ -14,6 +14,9 @@ let Todo = mongoose.model('Todo', {
     completedAt : {
         type : Number, // unix time stamp.
         default : null
+    },
+    _creator : {
+        type :  mongoose.Schema.Types.ObjectId // get objectid type in mongodb.
     }
 });
 
