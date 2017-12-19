@@ -104,6 +104,16 @@ UserSchema.statics.findByCredentials = function (email, password) {
     });
 };
 
+UserSchema.methods.removeToken = function (token) {
+    var user = this;
+
+    return user.update({
+        $pull : { // remove data from the documents.
+            tokens : {token}
+        }
+    });
+};
+
 // instance
 // use function keyword to access this.
 UserSchema.statics.findByToken = function (token) {
