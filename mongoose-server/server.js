@@ -1,3 +1,9 @@
+
+
+//when testing, you need to add this to package.json.
+//"test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha mongoose-server/**/*.test.js",
+
+
 require('./config/config');
 
 const _ = require('lodash');

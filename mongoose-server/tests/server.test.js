@@ -143,7 +143,8 @@ describe('DELETE /todos/:id', () => {
                 // toNotExist
                 // expect(null).toNotExist(); // todo Argument.
                 Todo.findById(hexId).then((todo) => {
-                    expect(todo).toNotExist();
+                    expect(todo).toBeFalsy();
+                    //expect(todo).toNotExist();
                     return done();
                 }).catch(e => done(e));
             });
@@ -162,7 +163,7 @@ describe('DELETE /todos/:id', () => {
                 }
 
                 Todo.findById(hexId).then((todo) => {
-                    expect(todo).toExist(); // deletion should never happen.
+                    expect(todo).toBeTruthy(); // deletion should never happen.
                     return done();
                 }).catch(e => done(e));
             });
@@ -216,7 +217,8 @@ describe('/PATCH /todos/:id', () => {
             .expect(res => {
                 expect(res.body.todo.text).toBe(body.text);
                 expect(res.body.todo.completed).toBe(true);
-                expect(res.body.todo.completedAt).toBeA("number");
+                //expect(res.body.todo.completedAt).toBeA("number");
+                expect(typeof res.body.todo.completedAt).toBe('number');
             })
             .end(done);
     });
@@ -250,7 +252,7 @@ describe('/PATCH /todos/:id', () => {
             .expect(res => {
                 expect(res.body.todo.text).toBe(body.text);
                 expect(res.body.todo.completed).toBe(false);
-                expect(res.body.todo.completedAt).toNotExist();
+                expect(res.body.todo.completedAt).toBeFalsy();
             })
             .end(done);
     });
@@ -292,8 +294,8 @@ describe('POST /users', () => {
             .post('/users')
             .send({email, password}) // send the data with post request.
             .expect((res) => {
-                expect(res.headers['x-auth']).toExist();
-                expect(res.body._id).toExist();
+                expect(res.headers['x-auth']).toBeTruthy();
+                expect(res.body._id).toBeTruthy();
                 expect(res.body.email).toBe(email);
             })
             //.end(done);
@@ -302,8 +304,8 @@ describe('POST /users', () => {
                     return done(err);
                 }
                 User.findOne({email}).then((user) => {
-                    expect(user).toExist();
-                    expect(user.password).toNotBe(password);
+                    expect(user).toBeTruthy();
+                    expect(user.password).not.toBe(password);
                     done();
                 }).catch(e => done(e));
             });
@@ -343,7 +345,7 @@ describe('POST /users/login', () => {
             })
             .expect(200)
             .expect((res) => {
-                expect(res.headers['x-auth']).toExist(); // if the token exists.
+                expect(res.headers['x-auth']).toBeTruthy(); // if the token exists.
             })
             .end((err, res) => {
                 if (err) {
@@ -351,7 +353,9 @@ describe('POST /users/login', () => {
                 }
 
                 User.findById(users[1]._id).then((user) => {
-                    expect(user.tokens[1]).toInclude({
+                    // something to contain. not to be exactly equal.
+                    // toObject to change mongoose object to javascript object.
+                    expect(user.toObject().tokens[1]).toMatchObject({
                         // should include these.
                         access : 'auth',
                         token : res.headers['x-auth']
@@ -373,7 +377,7 @@ describe('POST /users/login', () => {
             })
             .expect(400)
             .expect((res) => {
-                expect(res.headers['x-auth']).toNotExist(); // if the token exists.
+                expect(res.headers['x-auth']).toBeFalsy(); // if the token exists.
             })
             .end((err, res) => {
                 if (err) {
