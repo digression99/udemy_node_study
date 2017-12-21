@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
 
     });
 
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', (message, callback) => {
         console.log('message : ', message);
 
         // new message events.
@@ -52,6 +52,7 @@ io.on('connection', (socket) => {
 
         // why not using socket.emit?
         io.emit('newMessage', generateMessage(message.from, message.text)); // to all users.
+        callback('this is from the server.');
 
         // // everybody but this socket.
         // socket.broadcast.emit('newMessage', {

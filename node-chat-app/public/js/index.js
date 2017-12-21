@@ -28,4 +28,31 @@ socket.on('newEmail', (email) => {
 
 socket.on('newMessage', (message) => {
     console.log('message : ', message);
+    
+    let li = jQuery('<li></li>'); // list item.
+    li.text(`${message.from} : ${message.text}`);
+
+    // append : add it as the last child.
+    jQuery('#messages').append(li);
+});
+
+//
+// socket.emit('createMessage', {
+//     from : "Frank",
+//     text : "hi"
+// }, (data) => {
+//     // this is the acknowledgement from the server.
+//     // the message is very important.
+//     console.log('got it,', data); // ack to client.
+// });
+
+jQuery('#message-form').on('submit', (e) => {
+    e.preventDefault(); // prevent default event.
+
+    socket.emit('createMessage', {
+        from : 'User',
+        text : jQuery('[name=message]').val() // select anything that has an attribute name.
+    }, (message) => {
+        console.log("from server : ", message);
+    });
 });
