@@ -10,10 +10,10 @@ socket.on('connect', () => {
         text : 'Hey, fuck you.'
     });
 
-    socket.emit('createMessage', {
-        from : "baba",
-        text : "dada"
-    });
+    // socket.emit('createMessage', {
+    //     from : "baba",
+    //     text : "dada"
+    // });
 });
 
 socket.on('disconnect', () => {

@@ -22,11 +22,11 @@ io.on('connection', (socket) => {
         createdAt : new Date().getTime()
     }); // with data.
 
-    socket.emit('newMessage', {
-        from : "qwe",
-        text : "asd",
-        createdAt : new Date().getTime()
-    });
+    // socket.emit('newMessage', {
+    //     from : "qwe",
+    //     text : "asd",
+    //     createdAt : new Date().getTime()
+    // });
 
     // custom event from client.
     socket.on('createEmail', (newEmail) => {
@@ -35,6 +35,13 @@ io.on('connection', (socket) => {
 
     socket.on('createMessage', (message) => {
         console.log('message : ', message);
+
+        // why not using socket.emit?
+        io.emit('newMessage', {
+            from : message.from,
+            text : message.text,
+            createdAt : new Date().getTime()
+        }); // to all users.
     });
 
     // do something when user is disconnected.
