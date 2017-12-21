@@ -15,6 +15,28 @@ io.on('connection', (socket) => {
     // socket is for individual user.
     console.log('new user connected.');
 
+    // create event.
+    socket.emit('newEmail', {
+        from : 'Song',
+        text : "Hey, what's going on?",
+        createdAt : new Date().getTime()
+    }); // with data.
+
+    socket.emit('newMessage', {
+        from : "qwe",
+        text : "asd",
+        createdAt : new Date().getTime()
+    });
+
+    // custom event from client.
+    socket.on('createEmail', (newEmail) => {
+        console.log('newemail : ', newEmail);
+    });
+
+    socket.on('createMessage', (message) => {
+        console.log('message : ', message);
+    });
+
     // do something when user is disconnected.
     // can you fetch user's information?
     socket.on('disconnect', () => {
