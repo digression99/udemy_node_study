@@ -10,7 +10,7 @@ let io = socketIO(server);
 
 const path = require('path');
 app.use(express.static(path.join(__dirname, '../public'))); // middleware
-const {generateMessage} = require('./utils/message');
+const {generateMessage, generateLocationMessage} = require('./utils/message');
 
 // io is for all the users. socket is for one user.
 io.on('connection', (socket) => {
@@ -60,6 +60,16 @@ io.on('connection', (socket) => {
         //     text : message.text,
         //     createdAt : new Date().getTime()
         // });
+    });
+
+    socket.on('createLocationMessage', (coords) => {
+        //socket.broadcast.emit('')
+        io.emit('newLocationMessage', generateLocationMessage(
+            'Admin',
+            coords.latitude,
+            coords.longitude
+            // 'Admin', `lat : ${coords.latitude}, lng : ${coords.longitude}`)
+        ));
     });
 
     // do something when user is disconnected.

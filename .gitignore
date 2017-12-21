@@ -1,6 +1,9 @@
 # ignore node_modules folder.
 node_modules/
 
+#ignore bower components.
+bower_components/
+
 *.sh
 
 playground

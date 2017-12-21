@@ -56,3 +56,36 @@ jQuery('#message-form').on('submit', (e) => {
         console.log("from server : ", message);
     });
 });
+
+// this might be more cheap.
+let locationButton = jQuery('#send-location');
+//jQuery('#send-location').on();
+
+locationButton.on('click', () => {
+    if (!navigator.geolocation) {
+        return alert('gelocation not supported by your browser.');
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
+        socket.emit('createLocationMessage', {
+            latitude : position.coords.latitude,
+            longitude : position.coords.longitude
+        });
+    }, () => { // if something goes wrong.
+        alert('Unable to fetch location');
+    });
+});
+socket.on('newLocationMessage', (message) => {
+    let li = jQuery('<li></li>'); // list item.
+    let a = jQuery(`<a target="_blank">My Current Location</a>`); // blank means open up the new tab.
+
+    li.text(`${message.from} : `);
+    a.attr('href', message.url);
+    //li.text(`${message.from} : ${message.text}`);
+
+    // append : add it as the last child.
+    li.append(a);
+    jQuery('#messages').append(li);
+});
+
