@@ -11,16 +11,29 @@ let io = socketIO(server);
 const path = require('path');
 app.use(express.static(path.join(__dirname, '../public'))); // middleware
 
+// io is for all the users. socket is for one user.
 io.on('connection', (socket) => {
     // socket is for individual user.
     console.log('new user connected.');
+    socket.broadcast.emit('newMessage', {
+        from : 'admin',
+        text : 'new user joined.',
+        createdAt : new Date().getTime()
+    });
+
+    socket.emit('newMessage', {
+        from : 'admin',
+        text : 'welcome to node chat app!',
+        createdAt : new Date().getTime()
+    });
+    //socket.broadcast.emit
 
     // create event.
-    socket.emit('newEmail', {
-        from : 'Song',
-        text : "Hey, what's going on?",
-        createdAt : new Date().getTime()
-    }); // with data.
+    // socket.emit('newEmail', {
+    //     from : 'Song',
+    //     text : "Hey, what's going on?",
+    //     createdAt : new Date().getTime()
+    // }); // with data.
 
     // socket.emit('newMessage', {
     //     from : "qwe",
@@ -33,8 +46,17 @@ io.on('connection', (socket) => {
         console.log('newemail : ', newEmail);
     });
 
+    socket.on('newMessage', (message) => {
+
+
+    });
+
     socket.on('createMessage', (message) => {
         console.log('message : ', message);
+
+        // new message events.
+        // socket.emit from admin. text : welcome to the chat app.
+        // socket.broadcast.emit -> everybody but the user. from admin. text : new user joined.
 
         // why not using socket.emit?
         io.emit('newMessage', {
@@ -42,6 +64,13 @@ io.on('connection', (socket) => {
             text : message.text,
             createdAt : new Date().getTime()
         }); // to all users.
+
+        // everybody but this socket.
+        socket.broadcast.emit('newMessage', {
+            from : message.from,
+            text : message.text,
+            createdAt : new Date().getTime()
+        });
     });
 
     // do something when user is disconnected.
