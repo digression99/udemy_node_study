@@ -10,23 +10,15 @@ let io = socketIO(server);
 
 const path = require('path');
 app.use(express.static(path.join(__dirname, '../public'))); // middleware
+const {generateMessage} = require('./utils/message');
 
 // io is for all the users. socket is for one user.
 io.on('connection', (socket) => {
     // socket is for individual user.
     console.log('new user connected.');
-    socket.broadcast.emit('newMessage', {
-        from : 'admin',
-        text : 'new user joined.',
-        createdAt : new Date().getTime()
-    });
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined.'));
 
-    socket.emit('newMessage', {
-        from : 'admin',
-        text : 'welcome to node chat app!',
-        createdAt : new Date().getTime()
-    });
-    //socket.broadcast.emit
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
 
     // create event.
     // socket.emit('newEmail', {
@@ -59,18 +51,14 @@ io.on('connection', (socket) => {
         // socket.broadcast.emit -> everybody but the user. from admin. text : new user joined.
 
         // why not using socket.emit?
-        io.emit('newMessage', {
-            from : message.from,
-            text : message.text,
-            createdAt : new Date().getTime()
-        }); // to all users.
+        io.emit('newMessage', generateMessage(message.from, message.text)); // to all users.
 
-        // everybody but this socket.
-        socket.broadcast.emit('newMessage', {
-            from : message.from,
-            text : message.text,
-            createdAt : new Date().getTime()
-        });
+        // // everybody but this socket.
+        // socket.broadcast.emit('newMessage', {
+        //     from : message.from,
+        //     text : message.text,
+        //     createdAt : new Date().getTime()
+        // });
     });
 
     // do something when user is disconnected.

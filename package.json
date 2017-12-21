@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node node-chat-app/server/server.js",
-    "test": "",
+    "test": "mocha node-chat-app/server/**/*.test.js",
     "test-watch": "nodemon --exec \"npm test\""
   },
   "engines": {
