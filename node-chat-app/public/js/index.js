@@ -27,10 +27,13 @@ socket.on('newEmail', (email) => {
 });
 
 socket.on('newMessage', (message) => {
-    console.log('message : ', message);
+
+    let formattedTime = moment(message.createdAt).format('h:mm a');
+
+
     
     let li = jQuery('<li></li>'); // list item.
-    li.text(`${message.from} : ${message.text}`);
+    li.text(`${message.from} ${formattedTime}: ${message.text}`);
 
     // append : add it as the last child.
     jQuery('#messages').append(li);
@@ -87,8 +90,9 @@ locationButton.on('click', () => {
 socket.on('newLocationMessage', (message) => {
     let li = jQuery('<li></li>'); // list item.
     let a = jQuery(`<a target="_blank">My Current Location</a>`); // blank means open up the new tab.
+    let formattedTime = moment(message.createdAt).format('h:mm a');
 
-    li.text(`${message.from} : `);
+    li.text(`${message.from} ${formattedTime}: `);
     a.attr('href', message.url);
     //li.text(`${message.from} : ${message.text}`);
 

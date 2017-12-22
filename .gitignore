@@ -6,7 +6,8 @@ bower_components/
 
 *.sh
 
-playground
+# ignore playground file.
+playground/
 
 # never get added to git.
 mongoose-server/config/config.json
