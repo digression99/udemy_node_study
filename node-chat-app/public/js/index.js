@@ -29,14 +29,22 @@ socket.on('newEmail', (email) => {
 socket.on('newMessage', (message) => {
 
     let formattedTime = moment(message.createdAt).format('h:mm a');
+    let template = jQuery('#message-template').html();
+    let html = Mustache.render(template, {
+        text : message.text,
+        from : message.from,
+        createdAt : formattedTime
+    });
 
+    jQuery('#messages').append(html);
 
-    
-    let li = jQuery('<li></li>'); // list item.
-    li.text(`${message.from} ${formattedTime}: ${message.text}`);
+    //let formattedTime = moment(message.createdAt).format('h:mm a');
 
-    // append : add it as the last child.
-    jQuery('#messages').append(li);
+    // let li = jQuery('<li></li>'); // list item.
+    // li.text(`${message.from} ${formattedTime}: ${message.text}`);
+    //
+    // // append : add it as the last child.
+    // jQuery('#messages').append(li);
 });
 
 //
@@ -88,16 +96,28 @@ locationButton.on('click', () => {
 });
 
 socket.on('newLocationMessage', (message) => {
-    let li = jQuery('<li></li>'); // list item.
-    let a = jQuery(`<a target="_blank">My Current Location</a>`); // blank means open up the new tab.
+
     let formattedTime = moment(message.createdAt).format('h:mm a');
+    let template = jQuery('#location-message-template').html();
+    let html = Mustache.render(template, {
+        from : message.from,
+        createdAt : formattedTime,
+        url : message.url
+    });
 
-    li.text(`${message.from} ${formattedTime}: `);
-    a.attr('href', message.url);
-    //li.text(`${message.from} : ${message.text}`);
+    jQuery('#messages').append(html);
 
-    // append : add it as the last child.
-    li.append(a);
-    jQuery('#messages').append(li);
+
+    // let li = jQuery('<li></li>'); // list item.
+    // let a = jQuery(`<a target="_blank">My Current Location</a>`); // blank means open up the new tab.
+    // let formattedTime = moment(message.createdAt).format('h:mm a');
+    //
+    // li.text(`${message.from} ${formattedTime}: `);
+    // a.attr('href', message.url);
+    // //li.text(`${message.from} : ${message.text}`);
+    //
+    // // append : add it as the last child.
+    // li.append(a);
+    // jQuery('#messages').append(li);
 });
 
