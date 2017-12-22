@@ -2,7 +2,7 @@
 node_modules/
 
 #ignore bower components.
-bower_components/
+# bower_components/
 
 *.sh
 

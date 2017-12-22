@@ -1,6 +1,23 @@
 let socket = io(); // initiate the request.
 // socket is critical to communicating.
 
+scrollToBottom = () => {
+    // selectors
+    let messages = jQuery('#messages');
+    let newMessage = messages.children('li:last-child');
+    // heights
+    let clientHeight = messages.prop('clientHeight'); // cross brower attribute.
+    let scrollTop = messages.prop('scrollTop');
+    let scrollHeight = messages.prop('scrollHeight');
+    let newMessageHeight = newMessage.innerHeight();
+    let lastMessageHeight = newMessage.prev().innerHeight();
+
+    if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
+        messages.scrollTop(scrollHeight);
+        //console.log('should scroll');
+    }
+};
+
 socket.on('connect', () => {
     console.log('connected to server');
 
@@ -37,6 +54,7 @@ socket.on('newMessage', (message) => {
     });
 
     jQuery('#messages').append(html);
+    scrollToBottom();
 
     //let formattedTime = moment(message.createdAt).format('h:mm a');
 
@@ -46,16 +64,6 @@ socket.on('newMessage', (message) => {
     // // append : add it as the last child.
     // jQuery('#messages').append(li);
 });
-
-//
-// socket.emit('createMessage', {
-//     from : "Frank",
-//     text : "hi"
-// }, (data) => {
-//     // this is the acknowledgement from the server.
-//     // the message is very important.
-//     console.log('got it,', data); // ack to client.
-// });
 
 jQuery('#message-form').on('submit', (e) => {
     e.preventDefault(); // prevent default event.
@@ -106,6 +114,7 @@ socket.on('newLocationMessage', (message) => {
     });
 
     jQuery('#messages').append(html);
+    scrollToBottom();
 
 
     // let li = jQuery('<li></li>'); // list item.
