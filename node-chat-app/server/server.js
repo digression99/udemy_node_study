@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
 
         // why not using socket.emit?
         io.emit('newMessage', generateMessage(message.from, message.text)); // to all users.
-        callback('this is from the server.');
+        callback();
 
         // // everybody but this socket.
         // socket.broadcast.emit('newMessage', {

@@ -49,11 +49,14 @@ socket.on('newMessage', (message) => {
 jQuery('#message-form').on('submit', (e) => {
     e.preventDefault(); // prevent default event.
 
+    let messageTextbox = jQuery('[name=message]');
+
     socket.emit('createMessage', {
         from : 'User',
-        text : jQuery('[name=message]').val() // select anything that has an attribute name.
-    }, (message) => {
-        console.log("from server : ", message);
+        text : messageTextbox.val() // select anything that has an attribute name.
+    }, () => {
+        //console.log("from server : ", message);
+        messageTextbox.val('');  // set it to the empty value.
     });
 });
 
@@ -66,16 +69,21 @@ locationButton.on('click', () => {
         return alert('gelocation not supported by your browser.');
     }
 
+    locationButton.attr('disabled', 'disabled').text('sending location ...');
+
     navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
+        //console.log(position);
+        locationButton.removeAttr('disabled').text('send location');
         socket.emit('createLocationMessage', {
             latitude : position.coords.latitude,
             longitude : position.coords.longitude
         });
     }, () => { // if something goes wrong.
+        locationButton.removeAttr('disabled').text('send location');
         alert('Unable to fetch location');
     });
 });
+
 socket.on('newLocationMessage', (message) => {
     let li = jQuery('<li></li>'); // list item.
     let a = jQuery(`<a target="_blank">My Current Location</a>`); // blank means open up the new tab.
