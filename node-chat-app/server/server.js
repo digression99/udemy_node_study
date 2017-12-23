@@ -73,7 +73,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('createMessage', (message, callback) => {
-        console.log('message : ', message);
+        //console.log('message : ', message);
+
+        let user = users.getUser(socket.id);
+        if (user && isRealString(message.text)) {
+            io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+        }
 
         // new message events.
         // socket.emit from admin. text : welcome to the chat app.
@@ -94,8 +99,10 @@ io.on('connection', (socket) => {
 
     socket.on('createLocationMessage', (coords) => {
         //socket.broadcast.emit('')
-        io.emit('newLocationMessage', generateLocationMessage(
-            'Admin',
+        let user = users.getUser(socket.id);
+
+        io.to(user.room).emit('newLocationMessage', generateLocationMessage(
+            user.name,
             coords.latitude,
             coords.longitude
             // 'Admin', `lat : ${coords.latitude}, lng : ${coords.longitude}`)
