@@ -19,22 +19,40 @@ scrollToBottom = () => {
 };
 
 socket.on('connect', () => {
-    console.log('connected to server');
+    //console.log('connected to server');
 
-    // when connected, emit createEmail event.
-    socket.emit('createEmail', {
-        to : 'kim@kim.com',
-        text : 'Hey, fuck you.'
+    let params = jQuery.deparam(window.location.search);
+
+    // send in join.
+    socket.emit('join', params, (err) => {
+        if (err) {
+            alert(err);
+            window.location.href = '/'; // go back. redirection.
+        } else {
+            console.log('no error');
+        }
     });
 
-    // socket.emit('createMessage', {
-    //     from : "baba",
-    //     text : "dada"
+    // when connected, emit createEmail event.
+    // socket.emit('createEmail', {
+    //     to : 'kim@kim.com',
+    //     text : 'Hey, fuck you.'
     // });
+
 });
 
 socket.on('disconnect', () => {
     console.log('disconnected from server.');
+});
+
+socket.on('updateUserList', (users) => {
+    console.log('users list', users);
+
+    let ol = jQuery('<ol></ol>');
+    users.forEach((user) => {
+        ol.append(jQuery('<li></li>').text(user));
+    });
+    jQuery('#users').html(ol);
 });
 
 // custom event.
